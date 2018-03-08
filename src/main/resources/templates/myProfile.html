@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<title>Bootstrap Case</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link href="/css/style.css" rel="stylesheet" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<style>
+	body {
+  padding : 10px ; 
+}
+
+#exTab1 .tab-content {
+  background-color:  #ffb3b3;
+  padding : 5px 15px;
+  
+}
+
+#exTab1 .nav-pills > li > a {
+  color:black;
+  border-radius: 0;
+ background-color: #ff8080;
+}
+	</style>
+</head>
+<body>
+
+	<div th:replace="common/header::navbar"></div>
+	
+	
+
+
+	<div id="exTab1" class="container">	
+	<h2><span th:text="${#strings.toUpperCase{user.userName}}"></span></h2>
+<ul  class="nav nav-pills asd">
+			<li class="active" th:classappend="${classActiveEdit}? 'active'">
+        <a  href="#1a" data-toggle="tab"> <span class="glyphicon glyphicon-user" ></span>Edit</a>
+			</li>
+			<li th:classappend="${classActiveOrders}? 'active'"><a href="#2a" data-toggle="tab"><span class="glyphicon glyphicon-lock" ></span>Orders</a>
+			</li>
+			<li th:classappend="${classActiveBilling}? 'active'"><a href="#3a" data-toggle="tab"><span class="glyphicon glyphicon-wrench" ></span>Billing</a>
+			</li>
+			
+			<li th:classappend="${classActiveShipping}? 'active'"><a href="#4a" data-toggle="tab"><span class="glyphicon glyphicon-wrench" ></span>Shipping</a>
+			</li>
+  
+		</ul>
+
+			<div class="tab-content clearfix ">
+			  <div class="tab-pane active fs" id="1a" th:classappend="${classActiveEdit}? 'in active'">
+          <form th:action="@{/updateUserInfo}" method="post">
+    <input type="hidden"name="id" th:value="${user.id}">
+    <div class="bg-info" th:if="${updateUserInfo}">user info updated</div>
+    <div class="form-group">
+    <div class="row">
+    <div class="col-xs-6">
+    <label for="firstName">first name</label>
+    <input type="text" class="form-control" id="firstName" name="firstName" th:value="${user.firstName}"/>
+    </div>
+    
+    <div class="col-xs-6">
+    <label for="lastName">last name</label>
+    <input type="text" class="form-control" id="lastName" name="lastName" th:value="${user.lastName}"/>
+    </div>
+    </div>
+    </div>
+    
+    <div class="form-group">
+    
+     <label for="userName">user name</label>
+    <input type="text" class="form-control" id="userName" name="userName" th:value="${user.userName}"/>
+    
+    </div>
+    <div class="form-group">
+    
+     <label for="currentPassword"> current password</label>
+    <input type="text" class="form-control" id="currentPassword" name="currentPassword" th:value="${currentPassword}"/>
+    
+    </div>
+    <p style="color:red">enter your current password to change the email or password</p>
+    
+    <div class="form-group">
+    
+     <label for="email"> email address</label>
+    <input type="text" class="form-control" id="email" name="email" th:value="${user.email}"/>
+    
+    </div>
+    <p style="color:red">a valid email address</p>
+    
+   <div class="form-group">
+    
+     <label for="txtNewPassword"> password</label>
+    <input type="password" class="form-control" id="txtNewPassword" name="newPassword" />
+    
+    </div>
+    
+    <div class="form-group">
+    
+     <label for="txtConfirmPassword"> confirm password</label>
+    <input type="password" class="form-control" id="txtConfirmPassword" />
+    
+    </div>
+    <p style="color:red">to change the current pass enter the new pass in both fields</p>
+    
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+				</div>
+				<div class="tab-pane" id="2a" th:classappend="${classActiveOrders}? 'in active'">
+          <form>
+            <div class="form-group">
+      <label for="name">Ad Soyad:</label>
+      <input type="text" class="form-control" id="name" placeholder="isim girin" />
+    </div>
+           <div class="form-group">
+      <label for="name">Kullanıcı:</label>
+      <input type="text" class="form-control" id="kullanıcı" placeholder="Kullanıcı Adı" />
+    </div>
+            <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter email" />
+    </div>
+    <div class="form-group">
+      <label for="adres">Adres:</label>
+      <input type="text" class="form-control" id="adres" placeholder="adres" />
+    </div>
+            <div class="form-group">
+      <label for="phone">Telefon:</label>
+      <input type="number" class="form-control" id="tel" placeholder="telefon" />
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password" />
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+				</div>
+        <div class="tab-pane" id="3a" th:classappend="${classActiveBilling}? 'in active'">
+          <form>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter email" />
+    </div>
+    
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+				</div>
+				
+				<div class="tab-pane" id="4a" th:classappend="${classActiveShipping}? 'in active'">
+          <form>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter email" />
+    </div>
+    
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+				</div>
+          
+			</div>
+  </div>
